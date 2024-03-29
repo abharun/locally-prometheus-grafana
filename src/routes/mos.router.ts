@@ -1,9 +1,10 @@
 import express from "express";
-import { getMosMetrics, updateMosMetrics } from "../controllers";
+import { getMosMetrics, updateMosMetricsHist, updateMosMetricsGauge } from "../controllers";
 
 const router = express.Router();
 
 router.get('/', getMosMetrics);
-router.post('/', updateMosMetrics);
+router.post('/gauge', updateMosMetricsGauge);
+router.post('/hist', updateMosMetricsHist);
 
 export default router;
