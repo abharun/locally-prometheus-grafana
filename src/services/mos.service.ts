@@ -6,8 +6,9 @@ export const mosMetricsGauge = new Prom.Gauge({
     labelNames: ['metrics_color'],
 })
 
-export const mosMetricsHist = new Prom.Gauge({
+export const mosMetricsHist = new Prom.Histogram({
     name: 'request_size',
     help: 'Size for request value',
-    labelNames: ['metrics_size']
+    labelNames: ['user', 'location'],
+    buckets: [0, 1, 2, 3, 4, 5, 6],
 })

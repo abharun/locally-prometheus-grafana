@@ -16,11 +16,16 @@ export const updateMosMetricsGauge = async (_req: Request, res: Response) => {
   res.status(200).send({ Color: label });
 };
 
-export const updateMosMetricsHist = async (_req: Request, res: Response) => {
-    const value = Math.random()
-    const label = value < 0.3 ? "Small" : (value < 0.7 ? "Medium" : "Big" )
-    mosMetricsHist.inc({
-        metrics_size: label
+export const updateMosMetricsHist = async (req: Request, res: Response) => {
+    const { value, user, location } = req.query;
+    const val = value ? parseInt(value.toString()) : 0;
+    const userStr = user ? user.toString() : '';
+    const locationStr = location ? location.toString() : '';
+    mosMetricsHist.labels(userStr, locationStr).observe(val);
+
+    res.status(200).send({
+      value: val,
+      user: userStr,
+      location: locationStr
     })
-    res.status(200).send({ Size: label})
 };
