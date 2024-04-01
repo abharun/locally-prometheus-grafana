@@ -64,8 +64,21 @@ export const updateMosMetricsSummary = async (req: Request, res: Response) => {
   });
 };
 
+/*
+
+Prometheus Query for:
+- Calculating payment avg for last 5 minutes
+```promQuery
+rate(payment_value_sum[5m]) / rate(payment_value_count[5m])
+```
+- Calculating payment counts for last 5 minutes
+```promQuery
+rate(payment_value_count[5m]) * 5 * 60
+```
+
+*/
 export const updateMosMetricsPayment = async (req: Request, res: Response) => {
-  const { store, value } = req.body;
+  const { store, value } = req.query;
   const payValue = value ? parseFloat(value.toString()) : 0;
   const storeName = store ? store.toString() : "";
   mosMetricsPayments.observe(
@@ -73,5 +86,11 @@ export const updateMosMetricsPayment = async (req: Request, res: Response) => {
       Store: storeName,
     },
     payValue
+  );
+  res.status(200).send(
+    {
+      Store: storeName,
+      Value: payValue,
+    }
   );
 };

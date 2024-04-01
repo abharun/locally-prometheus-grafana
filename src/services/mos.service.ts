@@ -21,8 +21,8 @@ export const mosMetricsSummary = new Prom.Summary({
 })
 
 export const mosMetricsPayments = new Prom.Histogram({
-    name: 'payment-value',
+    name: 'payment_value',
     help: 'Payments from clients with value per store',
     labelNames: ['Store'],
-    buckets: [10, 50, 100],
+    buckets: [10, 20, 50],
 });
