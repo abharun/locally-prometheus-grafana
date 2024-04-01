@@ -19,3 +19,10 @@ export const mosMetricsSummary = new Prom.Summary({
     labelNames: ['user', 'location'],
     percentiles: [0, 1, 2, 3, 4]
 })
+
+export const mosMetricsPayments = new Prom.Histogram({
+    name: 'payment-value',
+    help: 'Payments from clients with value per store',
+    labelNames: ['Store'],
+    buckets: [10, 50, 100],
+});

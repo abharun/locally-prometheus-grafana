@@ -3,6 +3,7 @@ import * as promClient from "prom-client";
 import {
   mosMetricsGauge,
   mosMetricsHist,
+  mosMetricsPayments,
   mosMetricsSummary,
 } from "../services/mos.service";
 
@@ -48,11 +49,29 @@ export const updateMosMetricsSummary = async (req: Request, res: Response) => {
   const val = value ? parseFloat(value.toString()) : 0;
   const userStr = user ? user.toString() : "";
   const locationStr = location ? location.toString() : "";
-  mosMetricsSummary.observe({ user: userStr, location: locationStr }, val);
+  mosMetricsSummary.observe(
+    {
+      user: userStr,
+      location: locationStr,
+    },
+    val
+  );
 
   res.status(200).send({
     value: val,
     user: userStr,
     location: locationStr,
   });
+};
+
+export const updateMosMetricsPayment = async (req: Request, res: Response) => {
+  const { store, value } = req.body;
+  const payValue = value ? parseFloat(value.toString()) : 0;
+  const storeName = store ? store.toString() : "";
+  mosMetricsPayments.observe(
+    {
+      Store: storeName,
+    },
+    payValue
+  );
 };
