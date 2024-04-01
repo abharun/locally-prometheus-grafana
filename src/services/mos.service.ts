@@ -10,7 +10,7 @@ export const mosMetricsHist = new Prom.Histogram({
     name: 'request_hist',
     help: 'Metrics - Histogram',
     labelNames: ['user', 'location'],
-    buckets: [0, 1, 2, 3, 4, 5, 6],
+    buckets: [0, 1, 2, 3, 4],
 })
 
 export const mosMetricsSummary = new Prom.Summary({
