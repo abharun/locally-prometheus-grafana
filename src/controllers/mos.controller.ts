@@ -11,7 +11,7 @@ export const getMosMetrics = async (_req: Request, res: Response) => {
 export const updateMosMetrics = async (req: Request, res: Response) => {
   const { retailer, store, price } = req.body;
 
-  mosPaymentMetrics.observe({ store: store, retailer: retailer }, price);
+  mosPaymentMetrics.observe({ store: store }, price);
 
   res.status(200).send({
     retailer: retailer,
