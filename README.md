@@ -50,3 +50,7 @@ total sum within the latest interval: `rate(payment_metrics_sum[#interval]) * (#
 total count within the latest interval: `rate(payment_metrics_count[#interval]) * (#interval as second)`
 
 average value for captured values within the latest interval: `rate(payment_metrics_sum[#interval]) / rate(payment_metrics_count[#interval])`
+
+total sum within the latest interval per store: `sum by (store) (rate(payment_metrics_sum[#interval]) * (#interval as second))`
+
+total count within the latest interval per store: `count by (store) (rate(payment_metrics_count[#interval]) * (#interval as second))`
